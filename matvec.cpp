@@ -39,7 +39,24 @@ void print_matrix(const std::vector<std::vector<double>>& A) {
   std::cout << "]" << std::endl;
 }
 
+std::vector<double> operator* (const std::vector<std::vector<double>>& Matrix, const std::vector<double>& vec) {
+  auto N = vec.size();  
+  std::vector<double> MatVec_mult(N, 0.0);
+  for (auto i = 0; i < N; i++) {
+    for (auto j = 0; j < N; j++) {
+      MatVec_mult[i] += Matrix[i][j] * vec[j];
+    }
+  }
+  return MatVec_mult;
+}
+
+
 int main() {
+
+  std::vector<std::vector<double>> Matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+  std::vector<double> vec = {2, 1, 3};
+  std::vector<double> mat_vec_product = Matrix * vec;
+  print_vector(mat_vec_product);
 
   // Get the vector elements from the user
   std::vector<double> v{};
