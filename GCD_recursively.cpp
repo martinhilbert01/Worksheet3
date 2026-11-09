@@ -6,23 +6,25 @@
 
 #include <iostream>
 
-int gcd(int a, int b) {
-    for (int c = a % b; c > 0;) {
-        std::cout << c << "\n";
-        gcd(b, c);
+int gcd(int n1, int n2) {
+    int c = n1 % n2;
+    std::cout << n1 << " modulo " << n2 << " = " << c << "\n";
+    if (c == 0) {
+        return n2;
     }
-    return a;
+    return gcd(n2, c);
 }
 
 int main() {
-    int a = 48;
-    int b = 18;
+    int a = 96;
+    int b = 64;
     int result{};
 
+
      if (a == 0) {
-        return b;
+        result = b;
     } else if (b == 0) {
-        return a;
+        result = a;
     } else {
         result = gcd(a,b);
     }
