@@ -50,6 +50,17 @@ std::vector<double> operator* (const std::vector<std::vector<double>>& Matrix, c
   return MatVec_mult;
 }
 
+bool test_matrix_vector_product(const std::vector<double>& vec_opr, const std::vector<double>& vec_mult) {
+  auto N = vec_opr.size();
+  std::vector<double> vec_diff(N, 0.0);
+  for (int i = 0; i < N; i++) {
+    vec_diff[i] = vec_opr[i] - vec_mult[i];
+    if (vec_diff[i] == 0) {
+      throw(std::invalid_argument("Test failed!"));
+    }
+  }
+  return true;
+}
 
 int main() {
 
@@ -57,6 +68,14 @@ int main() {
   std::vector<double> vec = {2, 1, 3};
   std::vector<double> mat_vec_product = Matrix * vec;
   print_vector(mat_vec_product);
+
+  std::vector<double> test_vector = {13, 31, 48};
+
+  try {
+    test_matrix_vector_product(mat_vec_product, test_vector);
+  } catch (const std::invalid_argument& error) {
+    std::cerr << "Warning: " << error.what() << "\n";
+  }
 
   // Get the vector elements from the user
   std::vector<double> v{};
